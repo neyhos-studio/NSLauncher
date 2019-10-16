@@ -1,3 +1,5 @@
+var electron_1 = require("electron");
+var Main = require("../../../../Main");
 
 const form = document.getElementById('connection-form');   //recuperation form
 let email = document.getElementById('email');              //recup email
@@ -66,8 +68,9 @@ connexion.onclick = function(){
                     console.log(objectJson.error);
                 } else {
                     //TODO
+                    console.log(Main.default.createMainFrameWindow);
+                    Main.default.createMainFrameWindow(electron_1.app, electron_1.BrowserWindow);
                     // require('electron').remote.getCurrentWindow().close();
-                    // ipc.send('load-page-main-frame');
                 }
               }
         }catch(error){
