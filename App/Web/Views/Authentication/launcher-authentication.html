@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">    
+    <link rel="stylesheet" href="./../../../../style.css">
+    <script src="https://kit.fontawesome.com/1d3cc8e299.js"></script>
+    <title>Document</title>
+</head>
+<body>
+
+    <div class="fx f1 fx-col bg-light bd-light no-select">
+
+        <!-- Top Dragable -->
+        <window-manager></window-manager>
+
+        <!-- NS Logo -->
+        <div class="txt-c mt15">
+            <img class="logo-l" src="./../../../../App/Web/Sources/Images/NS-flat.png" alt="NEYHOS|Studio">
+        </div>
+
+
+        <!-- Form -->
+
+            <!-- Email -->
+            <input class="txt-input mlr15 mt10 ptb5" type="email" name="email" id="email" placeholder="*Email...">
+
+            <!-- Password -->
+            <input class="txt-input mlr15 mt10 ptb5 mb5" type="password" name="password" id="password" placeholder="*Mot de passe...">
+
+            <!-- Remember me -->
+            <span class="ckb"><input type="checkbox" name="remember" id="remember">*Remember me</span>
+
+            <!-- Buttons menu -->
+            <div class="fx fx-row mt5">
+                <div class="f1 txt-c">
+                    <button class="btn light shadow ml15 h-shadow">*Inscription</button>
+                </div>
+                <div class="f1 txt-c">
+                    <input class="btn info shadow mr15 h-shadow" type="submit" name="connexion" id="connexion" value="*Connexion">
+                </div>
+            </div>
+            
+            <!-- Forgot password -->
+            <div class="fx fx-row mb15">
+                <a class="f1 txt-c mt15 ft-b txt-h" style="font-size: 14px;">*Mot de passe oublié ?</a>
+            </div>  
+     
+
+    </div>
+
+    <!-- JS -->
+    <script src="./../../../../App/Web/Scripts/Authentication/AuthenticationConnection.js"></script>
+    <script src="./../../../../App/Web/Scripts/Core/Loader.js"></script>    
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Hello World!</title>
+    <link rel="stylesheet" href="./style.css">
+    <!-- Font Awesome -->
+    <script src="https://kit.fontawesome.com/1d3cc8e299.js"></script>    
+  </head>
+  <body>
+    
+    <div class="f1 fx fx-col light">
+
+        <!-- Top Dragable -->
+        <window-manager></window-manager>
+
+        <!-- Menu -->
+        <div class="f1 fx fx-col light dark">
+          <button onclick="events.LauncherUpdater()" class="w100p m-auto mt5 mb1 ptb10 info shadow h-info">Launcher Updater</button>
+          <button onclick="events.Authentication()" class="w100p m-auto mt5 mb1 ptb10 info shadow h-info">Authentication</button>
+          <button onclick="events.VerificationCode()" class="w100p m-auto mt5 mb1 ptb10 info shadow h-info">Verification Code</button>
+          <button onclick="events.MainFrame()" class="w100p m-auto mt5 mb1 ptb10 info shadow h-info">Main Frame</button>
+        </div>
+
+    </div>
+
+    <!-- JS -->
+    <script src="./App/Web/Scripts/Core/Loader.js"></script>
+  </body>
+</html>

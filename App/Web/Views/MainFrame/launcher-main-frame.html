@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">    
+    <link rel="stylesheet" href="./../../../../style.css">
+    <script src="https://kit.fontawesome.com/1d3cc8e299.js"></script>
+    <title>Document</title>
+</head>
+<body>
+
+    <div class="fx f1 bg-light bd-light fx-col no-select">
+
+        <!-- Top Dragable -->
+        <window-manager></window-manager>
+
+        <!-- Main Content -->
+        <div class="fx f1 light fx-row">
+
+            <!-- Left Menu -->
+            <div class="fx fx-col wfc h100p ghost z3 shadow">
+                <div class="fx f1 fx-col w100p hfc" id="left-game-bar">
+                    <item class="pt5 plr5"><img onclick="page.PageLoad_NSMMO()" class="logo br5 light h-shadow" src="./../../../../App/Web/Sources/Images/NS-flat.png" alt=""></item>
+                </div>
+                <div class="fx f1 fx-col fx-grow-inherit w100p hfc" id="left-menu-bar">
+                    <item class="pt5 plr5 txt-c"><img onclick="page.PageLoad_Profil()" class="logo-s br5 h-shadow h-light" src="./../../../../App/Web/Sources/Images/NS-flat.png" alt=""></item>
+                    <item class="pt5 plr5"><div onclick="page.PageLoad_Home()" class="br5 ft-dark txt-c h-shadow h-light"><i class="fas fa-home mtb10" style="font-size: 20px;"></i></div></item>
+                    <item class="pt5 plr5"><div onclick="page.PageLoad_Social()" class="br5 ft-dark txt-c h-shadow h-light"><i class="fas fa-user-friends mtb10" style="font-size: 20px;"></i></div></item>
+                    <item class="pt5 plr5"><div onclick="page.PageLoad_Store()" class="br5 ft-dark txt-c h-shadow h-light"><i class="fas fa-coins mtb10" style="font-size: 20px;"></i></div></item>
+                    <item class="pt5"><div onclick="page.PageLoad_LauncherPatch()" class="w100p ptb5 br5 ft-dark txt-c h-shadow h-light">0.0.2</div></item>
+                </div>
+            </div>
+
+            <!-- Page Content -->
+            <page class="fx f1 dark"></page>
+
+        </div>
+
+    </div>
+
+    <!-- JS -->
+    <script src="./../../../../App/Web/Scripts/Core/Loader.js"></script> 
+    <script>
+        page.PageLoad_NSMMO();
+    </script>   
+</body>
+</html>
