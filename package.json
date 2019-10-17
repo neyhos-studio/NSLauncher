@@ -3,17 +3,16 @@
   "version": "1.0.0",
   "description": "A minimal Electron application",
   "main": "app.js",
-  "scripts": {
-    "start": "electron ."
+  "scripts": {    
+    "compile": "tsc",
+    "keep-compile": "tsc -w",
+    "electron": "electron .",
+    "keep-compile-build" : "start cmd.exe @cmd /k \"npm run electron\" && start cmd.exe @cmd /k \"npm run keep-compile\"",
+    "start": "npm run keep-compile-build"
   },
   "repository": "https://github.com/electron/electron-quick-start",
   "keywords": [
-    "Electron",
-    "electron",
-    "quick",
-    "start",
-    "tutorial",
-    "demo"
+    "start"
   ],
   "author": "GitHub",
   "license": "CC0-1.0",

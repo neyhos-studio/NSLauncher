@@ -189,10 +189,13 @@ button{
 
 
 /**/
+.txt-h:hover{text-shadow: 0px 0px 10px #30303080;}
 .shadow{box-shadow: 0px 0px 10px #30303025;}
 .h-shadow:hover{box-shadow: 0px 0px 10px #30303080;}
 .h-light:hover{background: #f1f2f3;}
-.txt-h:hover{text-shadow: 0px 0px 10px #30303080;}
+.h-lighter:hover{background: #fff;}
+.h-dark:hover{background: #151515;}
+.h-ghost:hover{background: #d1d2d3;}
 .h-info:hover{background: #005c99;color: #f1f2f3;}
 
 
