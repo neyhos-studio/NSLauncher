@@ -1,6 +1,4 @@
-var electron_1 = require("electron");
-var Main = require("../../../../Main");
-
+import Token from "../../../Entities/Token/Token";
 const form = document.getElementById('connection-form');   //recuperation form
 let email = document.getElementById('email');              //recup email
 let password = document.getElementById('password');        //recup mdp
@@ -38,6 +36,7 @@ connexion.onclick = function(){
     let verrif = true;
     const connect = Connexion(email.value, password.value);
     const xhr = new XMLHttpRequest();
+    const xhr2 = new XMLHttpRequest();
 
     if(!validateEmail(connect.email) || validateSymbole(connect.email)){
         verrif = false;
@@ -61,16 +60,27 @@ connexion.onclick = function(){
                 let objectJson = JSON.parse(xhr.response)
                 // console.log(objectJson.hasError)     //L'objet renvois si oui ou non y'a eu une erreur
                 // console.log(objectJson.error)        //L'objet renvois l'erreur envoyé par le back
-                console.log(objectJson.response)     //L'objet renvois la réponse, qui peut être un Objet d'objet, une string, ...
+                // console.log(objectJson.response)     //L'objet renvois la réponse, qui peut être un Objet d'objet, une string, ...
 
                 if(objectJson.hasError){
                     //TODO
-                    console.log(objectJson.error);
-                } else {
-                    //TODO
-                    console.log(Main.default.createMainFrameWindow);
-                    Main.default.createMainFrameWindow(electron_1.app, electron_1.BrowserWindow);
-                    // require('electron').remote.getCurrentWindow().close();
+                    if(objectJson.error === null){
+                        let dateFin = objectJson.response.finForm;  //"finForm": "23.10.2019-20:21:44",
+                        let dateArray = dateFin.split('-');
+                        let date = dateArray[0];
+                        let heure = dateArray[1];
+
+                        let raison = objectJson.response.raison;
+                        let message = "T'es ban jusqu'au " + date + " à " + heure + " Cause :" + raison;
+                        test(message);
+                    }else{
+                        test(objectJson.error);
+                    }
+                }else{
+                    const token = Token(objectJson.response);
+                    returnUser(token);
+                    events.MainFrame();
+                    require('electron').remote.getCurrentWindow().close();
                 }
               }
         }catch(error){
@@ -80,5 +90,26 @@ connexion.onclick = function(){
     }
     
 
+}
+
+function returnUser(token){
+    xhr2.open('POST', 'http://92.222.80.11:5000/api/Utilisateur/RetournerUtilisateur');
+    xhr2.setRequestHeader('Content-Type', 'application/json');
+    xhr2.send(JSON.stringify(token));
+
+    xhr2.onload = function() {
+        let objectJson = JSON.parse(xhr2.response);
+        console.log(objectJson);
+    }
+}
+
+function test(message){
+    let modale = document.getElementsByTagName('error-message')[0];
+    modale.textContent = message;
+    
+    if (modale.classList.contains('hide'))
+        modale.classList.remove('hide');
+    else
+        modale.classList.add('hide');
 }
     

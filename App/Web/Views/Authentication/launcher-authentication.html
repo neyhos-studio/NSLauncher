@@ -33,7 +33,6 @@
 
         text-align: center;
     ">
-        Erreur système, contactez un administrateur !
     </error-message>
 
     <div class="fx f1 fx-col bg-light bd-light no-select">
@@ -81,17 +80,7 @@
     </div>
 
     <!-- JS -->
-    <script src="./../../../../App/Web/Scripts/Authentication/AuthenticationConnection.js"></script>
     <script src="./../../../../App/Web/Scripts/Core/Loader.js"></script>  
-    <script>
-        function test(){
-            let modale = document.getElementsByTagName('error-message')[0];
-            
-            if (modale.classList.contains('hide'))
-                modale.classList.remove('hide');
-            else
-                modale.classList.add('hide');
-        }
-    </script>  
+    <script src="./../../../../App/Web/Scripts/Authentication/AuthenticationConnection.js"></script> 
 </body>
 </html>
