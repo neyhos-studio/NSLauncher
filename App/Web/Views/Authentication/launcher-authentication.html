@@ -10,35 +10,64 @@
 </head>
 <body>
 
+        <error-message class="hide" style="
+        background: #151515d0;
+        border: 1px solid #888;
+        border-radius: 5px;
+        color: #f1f2f3;
+
+        padding: 10px;
+
+        position: fixed;
+        z-index: 5;
+
+        top: 30px;
+        left: 16px;
+
+        min-width: calc(100vw - 32px - 20px);
+        max-width: calc(100vw - 32px - 20px);
+        min-height: fit-content;
+        max-height: 55px;
+
+        overflow-x: auto;
+
+        text-align: center;
+    ">
+        Erreur système, contactez un administrateur !
+    </error-message>
+
     <div class="fx f1 fx-col bg-light bd-light no-select">
 
         <!-- Top Dragable -->
         <window-manager></window-manager>
 
         <!-- NS Logo -->
-        <div class="txt-c mt15">
-            <img class="logo-l" src="./../../../../App/Web/Sources/Images/NS-flat.png" alt="NEYHOS|Studio">
+        <div class="txt-c mt15 ft-r">
+            <img id="ns-logo" class="logo-l" src="./../../../../App/Web/Sources/Images/NS-flat.png" alt="NEYHOS|Studio">
         </div>
 
 
         <!-- Form -->
+        <div id="authentication" class="fx f1 fx-col no-select" action="">
 
             <!-- Email -->
-            <input class="txt-input mlr15 mt10 ptb5" type="email" name="email" id="email" placeholder="*Email...">
+            <input required class="f1 txt-input mlr15 mt10 ptb5" type="email" name="email" id="email" placeholder="*Email...">
 
             <!-- Password -->
-            <input class="txt-input mlr15 mt10 ptb5 mb5" type="password" name="password" id="password" placeholder="*Mot de passe...">
+            <input required class="f1 txt-input mlr15 mt10 ptb5 mb5" type="password" name="password" id="password" placeholder="*Mot de passe..." minlength="8" maxlength="16">
 
             <!-- Remember me -->
-            <span class="ckb"><input type="checkbox" name="remember" id="remember">*Remember me</span>
+            <div class="fx fx-row mt5 mb5">
+                <input class="ml25 " type="checkbox" name="remember" id="remember">*Remember me
+            </div>
 
             <!-- Buttons menu -->
             <div class="fx fx-row mt5">
                 <div class="f1 txt-c">
-                    <button class="btn light shadow ml15 h-shadow">*Inscription</button>
+                    <button onclick="test()" class="btn light shadow ml15 h-shadow">*Inscription</button>
                 </div>
                 <div class="f1 txt-c">
-                    <input class="btn info shadow mr15 h-shadow" type="submit" name="connexion" id="connexion" value="*Connexion">
+                    <button class="btn info shadow mr15 h-shadow" type="submit" name="connexion" id="connexion" >*Connexion</button>
                 </div>
             </div>
             
@@ -46,12 +75,23 @@
             <div class="fx fx-row mb15">
                 <a class="f1 txt-c mt15 ft-b txt-h" style="font-size: 14px;">*Mot de passe oublié ?</a>
             </div>  
-     
+
+        </div>
 
     </div>
 
     <!-- JS -->
     <script src="./../../../../App/Web/Scripts/Authentication/AuthenticationConnection.js"></script>
-    <script src="./../../../../App/Web/Scripts/Core/Loader.js"></script>    
+    <script src="./../../../../App/Web/Scripts/Core/Loader.js"></script>  
+    <script>
+        function test(){
+            let modale = document.getElementsByTagName('error-message')[0];
+            
+            if (modale.classList.contains('hide'))
+                modale.classList.remove('hide');
+            else
+                modale.classList.add('hide');
+        }
+    </script>  
 </body>
 </html>

@@ -15,6 +15,10 @@ button{
     padding: none;
 }
 
+input:invalid{
+    outline-color: #da2809;
+}
+
 [drag-window]{
     -webkit-app-region:drag;
 }
