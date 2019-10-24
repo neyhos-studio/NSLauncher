@@ -12,6 +12,19 @@ var IpcEventsRepo = (function () {
     ;
     IpcEventsRepo.prototype.MainFrame = function () { this.ipc.send('load-page-main-frame'); };
     ;
+    IpcEventsRepo.prototype.GetSession = function () {
+        var session;
+        this.ipc.send('get-session');
+        session = this.ipc.on('reply-get-session', function (event, arg) {
+            console.log(arg);
+            return arg[0];
+        });
+        console.log(session);
+        return session;
+    };
+    ;
+    IpcEventsRepo.prototype.SetSession = function (session) { this.ipc.send('set-session', session); };
+    ;
     return IpcEventsRepo;
 }());
 exports.default = IpcEventsRepo;

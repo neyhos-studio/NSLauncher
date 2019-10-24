@@ -1,7 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var Token = (function () {
-    function Token() {
+    function Token(token) {
+        this.token = token;
     }
     return Token;
 }());

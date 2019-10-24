@@ -1,7 +1,7 @@
 {
-  "name": "electron-quick-start",
+  "name": "ns-launcher",
   "version": "1.0.0",
-  "description": "A minimal Electron application",
+  "description": "NS Launcher - Access your game from our portal.",
   "main": "app.js",
   "scripts": {    
     "compile": "tsc",
@@ -10,11 +10,11 @@
     "keep-compile-build" : "start cmd.exe @cmd /k \"npm run electron\" && start cmd.exe @cmd /k \"npm run keep-compile\"",
     "start": "npm run keep-compile-build"
   },
-  "repository": "https://github.com/electron/electron-quick-start",
+  "repository": "https://github.com/...",
   "keywords": [
     "start"
   ],
-  "author": "GitHub",
+  "author": "NEYHOS|Studio",
   "license": "CC0-1.0",
   "devDependencies": {
     "electron": "^6.0.12"

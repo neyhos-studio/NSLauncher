@@ -26,7 +26,7 @@ function Connexion(email, password) {
     let obj = {};
     obj.email = email;
     obj.password = password;
-
+v
     return obj;
 }
 
@@ -52,7 +52,7 @@ connexion.onclick = function(){
 
     if(verrif){
         try{
-            xhr.open('POST', 'http://92.222.80.11:5000/api/Connexion/Connexion'); 
+            xhr.open('POST', 'http://92.222.80.11:5000/api/Connexion/Connection'); 
             xhr.setRequestHeader('Content-Type', 'application/json');
             xhr.send(JSON.stringify(connect));
     

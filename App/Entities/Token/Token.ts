@@ -1,7 +1,9 @@
 export default class Token{
 
-    public value: String;
+    public token: string;
 
-    constructor(){}
+    constructor(token: string){
+        this.token = token;
+    }
 
 }
