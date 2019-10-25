@@ -9,7 +9,12 @@ var AuthenticationMapper = (function () {
         user.nickname = backendObject.response.pseudo;
         user.onlineStatus = backendObject.response.status;
         user.ip = backendObject.response.ip;
-        user.token = backendObject.response.token;
+        backendObject.response.friendList.array.forEach(function (backendFriend) {
+            var friend = new User_1.default();
+            friend.nickname = backendFriend.nickname;
+            friend.onlineStatus = backendFriend.status;
+            user.friendList.push(friend);
+        });
         return user;
     };
     return AuthenticationMapper;

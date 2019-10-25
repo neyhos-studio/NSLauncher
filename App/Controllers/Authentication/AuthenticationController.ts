@@ -26,6 +26,8 @@ export default class AuthenticationController{
         .then(res => res.json())
         .then(res => {
             let user = AuthenticationMapper.getUser(res);
+            // TODO 
+            // let session = require('electron').remote.getCurrentWindow().webContents.session;
         })
         .catch(error => Tools.showModale(error));
     }
