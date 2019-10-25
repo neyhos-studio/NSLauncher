@@ -71,10 +71,10 @@
                 <!-- Buttons menu -->
                 <div class="fx fx-row mt5">
                     <div class="f1 txt-c">
-                        <button onclick="test()" class="btn light shadow ml15 h-shadow">*Inscription</button>
+                        <button onclick="test()" class="btn light shadow ml15">*Inscription</button>
                     </div>
                     <div class="f1 txt-c">
-                        <button class="btn info shadow mr15 h-shadow" type="submit" name="connexion" id="connexion" >*Connexion</button>
+                        <button class="btn info shadow mr15" onclick="connection(this)" type="submit" name="connexion" id="connexion" >*Connexion</button>
                     </div>
                 </div>
                 
@@ -89,23 +89,28 @@
     </div>
 
     <!-- JS -->
-    <script src="./../../../../App/Web/Scripts/Core/Loader.js"></script>  
-    <!-- <script src="./../../../../App/Web/Scripts/Authentication/AuthenticationConnection.js"></script>  -->
+    <script src="./../../../../App/Web/Scripts/Core/Loader.js"></script>
     <script>     
         const AuthenticationController = require(appRoot + '/App/Controllers/Authentication/AuthenticationController').default;
+        const Credentials = require(appRoot + '/App/Controllers/Authentication/AuthenticationController').default;
+        const Tools = require(appRoot + '/App/Core/Tools/Tools').default;
 
+        const connection = ()=>{
 
-        const connexion = document.getElementById('connexion'); 
+            Tools.disableButtons();
 
-        connexion.addEventListener('click', ()=>{
-            let email = document.getElementById('email');         //recup email
-            let password = document.getElementById('password');   //recup mdp
+            let authentication =  new AuthenticationController()
+
+            // get credentials
+            let email = document.getElementById('email');
+            let password = document.getElementById('password');
+            let credentials = new Credentials(); 
+            credentials.email = email.value;
+            credentials.password = password.value;
                     
-            let authenticationController = new AuthenticationController();
-
-            authenticationController.connection(email.value, password.value)
-        });
-
+            // connect using controller
+            authentication.getConnectionAPI(credentials);
+        }
 
     </script>
 </body>

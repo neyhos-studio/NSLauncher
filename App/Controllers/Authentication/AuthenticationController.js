@@ -1,99 +1,66 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var Credentials_1 = require("../../Entities/Credentials/Credentials");
 var Token_1 = require("../../Entities/Token/Token");
-var User_1 = require("../../Entities/User/User");
-var IpcEventsRepo_1 = require("../../Repositories/IpcEventsRepo/IpcEventsRepo");
 var FramesPath_1 = require("../../Core/Constantes/FramesPath/FramesPath");
+var Tools_1 = require("../../Core/Tools/Tools");
+var AuthenticationMapper_1 = require("../Mappers/AuthenticationMapper");
 var AuthenticationController = (function () {
     function AuthenticationController() {
-    }
-    AuthenticationController.prototype.validateEmail = function (email) {
-        var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-        return re.test(String(email).toLowerCase());
-    };
-    AuthenticationController.prototype.validateSymbole = function (str) {
-        var re = /\\|\|\(|\)|\[|\]|\;|\:|\"|\'|\/|\<|\>|\&|\%|\*|\!|\?|\{|\}/;
-        return re.test(String(str));
-    };
-    AuthenticationController.prototype.validatePassword = function (str) {
-        var re = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
-        return re.test(str);
-    };
-    AuthenticationController.prototype.displayModale = function (message) {
-        var modale = document.getElementsByTagName('error-message')[0];
-        modale.textContent = message;
-        if (modale.classList.contains('hide'))
-            modale.classList.remove('hide');
-        else
-            modale.classList.add('hide');
-    };
-    AuthenticationController.prototype.returnUser = function (token) {
-        var xhr2 = new XMLHttpRequest();
-        xhr2.open('POST', 'http://92.222.80.11:5000/api/Utilisateur/RetrieveUser');
-        xhr2.setRequestHeader('Content-Type', 'application/json');
-        xhr2.send(JSON.stringify(token));
-        xhr2.onload = function () {
-            var objectJson = JSON.parse(xhr2.response);
-            var user = new User_1.default();
-            user.nickname = objectJson.response.pseudo;
-            user.onlineStatus = objectJson.response.status;
-            user.ip = objectJson.response.ip;
-            user.token = token;
-            var events = new IpcEventsRepo_1.default();
-            var session = events.GetSession();
-            console.log(session);
-        };
-    };
-    AuthenticationController.prototype.connection = function (email, password) {
         var _this = this;
-        var verrif = true;
-        var connect = new Credentials_1.default(email, password);
-        var xhr = new XMLHttpRequest();
-        if (!this.validateEmail(connect.email) || this.validateSymbole(connect.email)) {
-            verrif = false;
-        }
-        else if (this.validateSymbole(connect.password)) {
-            verrif = false;
-        }
-        xhr.onreadystatechange = function () {
-            if (xhr.readyState == 4 && xhr.status == 0) {
-                console.log("erreur");
-            }
-        };
-        if (verrif) {
-            try {
-                xhr.open('POST', 'http://92.222.80.11:5000/api/Connexion/Connection');
-                xhr.setRequestHeader('Content-Type', 'application/json');
-                xhr.send(JSON.stringify(connect));
-                xhr.onload = function () {
-                    var objectJson = JSON.parse(xhr.response);
-                    var authClass = new AuthenticationController();
-                    if (objectJson.hasError) {
-                        if (objectJson.error === null) {
-                            var dateFin = objectJson.response.endFormalize;
+        this.getConnectionAPI = function (credentials) {
+            var verifyUserInput = !Tools_1.default.validateEmail(credentials.email) || Tools_1.default.validateSymbole(credentials.email) || Tools_1.default.validateSymbole(credentials.password) ? false : true;
+            if (verifyUserInput) {
+                fetch('http://92.222.80.11:5000/api/Connexion/Connection', {
+                    method: 'POST',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(credentials)
+                })
+                    .then(function (res) { return res.json(); })
+                    .then(function (res) {
+                    if (res.hasError) {
+                        if (res.error.hasBanned !== null && res.error.hasBanned == true) {
+                            var dateFin = res.error.endFormalize;
                             var dateArray = dateFin.split('-');
                             var date = dateArray[0];
                             var heure = dateArray[1];
-                            var raison = objectJson.response.reason;
+                            var raison = res.error.reason;
                             var message = "T'es ban jusqu'au " + date + " à " + heure + " Cause :" + raison;
-                            authClass.displayModale(message);
+                            Tools_1.default.showModale(message);
                         }
                         else {
-                            authClass.displayModale(objectJson.error);
+                            var message = res.error;
+                            Tools_1.default.showModale(message);
                         }
                     }
                     else {
-                        var token = new Token_1.default(objectJson.response);
-                        _this.returnUser(token);
+                        _this.getUserAPI(new Token_1.default(res.response));
                         require('electron').remote.getCurrentWindow().loadFile(FramesPath_1.default.MainFrame);
                     }
-                };
+                })
+                    .catch(function (error) { return Tools_1.default.showModale(error); });
             }
-            catch (error) {
-                console.log(error);
+            else {
+                Tools_1.default.showModale("*not valide character in input field");
             }
-        }
+        };
+    }
+    AuthenticationController.prototype.getUserAPI = function (token) {
+        fetch('http://92.222.80.11:5000/api/Utilisateur/RetrieveUser', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(token)
+        })
+            .then(function (res) { return res.json(); })
+            .then(function (res) {
+            var user = AuthenticationMapper_1.default.getUser(res);
+        })
+            .catch(function (error) { return Tools_1.default.showModale(error); });
     };
     return AuthenticationController;
 }());

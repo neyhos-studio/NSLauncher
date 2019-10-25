@@ -19,6 +19,16 @@ input:invalid{
     outline-color: #da2809;
 }
 
+button:disabled{
+    background: #cacaca;
+    color: #888;
+    box-shadow: none !important;
+}
+
+button:hover{
+    box-shadow: 0px 0px 10px #30303080;
+}
+
 [drag-window]{
     -webkit-app-region:drag;
 }
