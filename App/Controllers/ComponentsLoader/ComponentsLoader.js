@@ -53,8 +53,6 @@ var ComponentsLoader = (function () {
             text = text.replace('${{nickname}}', nickname);
             text = text.replace('${{status}}', status);
             element.innerHTML += text;
-        })
-            .finally(function () {
         });
     };
     ;
@@ -76,11 +74,35 @@ var ComponentsLoader = (function () {
         var u5 = new User_1.default();
         u4.nickname = "User 5";
         u4.onlineStatus = OnlineStatus_1.OnlineStatus.Banned;
+        var u6 = new User_1.default();
+        u3.nickname = "User 3";
+        u3.onlineStatus = OnlineStatus_1.OnlineStatus.Busy;
+        var u7 = new User_1.default();
+        u4.nickname = "User 4";
+        u4.onlineStatus = OnlineStatus_1.OnlineStatus.Offline;
+        var u8 = new User_1.default();
+        u4.nickname = "User 5";
+        u4.onlineStatus = OnlineStatus_1.OnlineStatus.Banned;
+        var u9 = new User_1.default();
+        u3.nickname = "User 3";
+        u3.onlineStatus = OnlineStatus_1.OnlineStatus.Busy;
+        var u10 = new User_1.default();
+        u4.nickname = "User 4";
+        u4.onlineStatus = OnlineStatus_1.OnlineStatus.Offline;
+        var u11 = new User_1.default();
+        u4.nickname = "User 5";
+        u4.onlineStatus = OnlineStatus_1.OnlineStatus.Banned;
         userFriendList.push(u1);
         userFriendList.push(u2);
         userFriendList.push(u3);
         userFriendList.push(u4);
         userFriendList.push(u5);
+        userFriendList.push(u6);
+        userFriendList.push(u7);
+        userFriendList.push(u8);
+        userFriendList.push(u9);
+        userFriendList.push(u10);
+        userFriendList.push(u11);
         userFriendList.forEach(function (friend) {
             _this.LoadFriendItem(element, friend);
         });

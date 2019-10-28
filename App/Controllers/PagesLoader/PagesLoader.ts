@@ -67,9 +67,6 @@ export default class PagesLoader {
         .then( response => response.text() )
         .then( text => PAGE_HOLDER.innerHTML = text)    
         .finally(()=>{
-            // When the component is load
-            // Process here
-
             // Create a "Friend List" after the page is loaded 
             let friends = document.getElementsByTagName('friends')[0];
             if ( friends !== null)

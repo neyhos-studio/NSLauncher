@@ -64,17 +64,11 @@ export default class ComponentsLoader {
             text = text.replace('${{nickname}}', nickname);
             text = text.replace('${{status}}', status);
             element.innerHTML += text
-
         })
-        .finally(()=>{
-            // When the component is load
-            // Process here
-
-        });
     };
     static LoadFriendList(element){
 
-        // TODO mock friend list
+        // TODO unmock friend list
         let userFriendList: User[] = new Array();  
         
         // Mocks
@@ -83,24 +77,37 @@ export default class ComponentsLoader {
         let u3 = new User(); u3.nickname = "User 3"; u3.onlineStatus = OnlineStatus.Busy;
         let u4 = new User(); u4.nickname = "User 4"; u4.onlineStatus = OnlineStatus.Offline;
         let u5 = new User(); u4.nickname = "User 5"; u4.onlineStatus = OnlineStatus.Banned;
+        let u6 = new User(); u3.nickname = "User 3"; u3.onlineStatus = OnlineStatus.Busy;
+        let u7 = new User(); u4.nickname = "User 4"; u4.onlineStatus = OnlineStatus.Offline;
+        let u8 = new User(); u4.nickname = "User 5"; u4.onlineStatus = OnlineStatus.Banned;
+        let u9 = new User(); u3.nickname = "User 3"; u3.onlineStatus = OnlineStatus.Busy;
+        let u10 = new User(); u4.nickname = "User 4"; u4.onlineStatus = OnlineStatus.Offline;
+        let u11 = new User(); u4.nickname = "User 5"; u4.onlineStatus = OnlineStatus.Banned;
         userFriendList.push(u1);
         userFriendList.push(u2);
         userFriendList.push(u3);
         userFriendList.push(u4);
         userFriendList.push(u5);
+        userFriendList.push(u6);
+        userFriendList.push(u7);
+        userFriendList.push(u8);
+        userFriendList.push(u9);
+        userFriendList.push(u10);
+        userFriendList.push(u11);
 
 
+        // load each items
         userFriendList.forEach(friend => {                           
             this.LoadFriendItem(element, friend);
         });
 
 
-        // Last friend added of the list
+        // Foreach friend in friend list
         let friendList = Array.prototype.slice.call(element.childNodes);
         friendList.forEach(friendElement => {  
             friendElement.addEventListener('click', ()=>{
                 let socialRight = document.getElementsByTagName('social-right')[0];
-                this.LoadFriendChat(socialRight,);    
+                this.LoadFriendChat(socialRight);    
             });
         });
         

@@ -3,11 +3,11 @@
   "version": "1.0.0",
   "description": "NS Launcher - Access your game from our portal.",
   "main": "app.js",
-  "scripts": {    
+  "scripts": {
     "compile": "tsc",
     "keep-compile": "tsc -w",
     "electron": "electron .",
-    "keep-compile-build" : "start cmd.exe @cmd /k \"npm run electron\" && start cmd.exe @cmd /k \"npm run keep-compile\"",
+    "keep-compile-build": "start cmd.exe @cmd /k \"npm run electron\" && start cmd.exe @cmd /k \"npm run keep-compile\"",
     "start": "npm run keep-compile-build"
   },
   "repository": "https://github.com/...",
